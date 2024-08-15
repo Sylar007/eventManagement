@@ -1,0 +1,1249 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Celebratix</name>
+    </assembly>
+    <members>
+        <member name="M:Celebratix.Controllers.AccountController.RefreshCookie">
+            <summary>
+            Used to refresh the cookie manually.
+            Main reasons to use this would be to refresh the claims and roles
+            (i.e. see if the users role has changed. Could be done if the user is waiting to get verified and refreshes the page)
+            </summary>
+        </member>
+        <member name="M:Celebratix.Controllers.AccountController.RefreshToken(System.String)">
+            <response code="400">If the refresh token is invalid (invalid_refresh_token)</response>
+        </member>
+        <member name="M:Celebratix.Controllers.AccountController.RefreshTokenCookie(System.String)">
+            <response code="400">If the refresh token is invalid (invalid_refresh_token)</response>
+        </member>
+        <member name="M:Celebratix.Controllers.AccountController.InvalidateRefreshTokenFamily(System.String)">
+            <response code="400">If the refresh token is invalid (invalid_refresh_token)</response>
+        </member>
+        <member name="M:Celebratix.Controllers.AccountController.InitializeLoginWithPhone(Celebratix.Common.Models.DTOs.InitializePhoneLoginDto)">
+            <response code="400">If the login is invalid (invalid_login)</response>
+        </member>
+        <member name="M:Celebratix.Controllers.AccountController.LoginWithPhone(Celebratix.Common.Models.DTOs.LoginWithPhoneDto)">
+            <response code="400">If the login is invalid (invalid_login)</response>
+        </member>
+        <member name="M:Celebratix.Controllers.AccountController.LoginWithEmail(Celebratix.Common.Models.DTOs.LoginWithEmailDto)">
+            <response code="400">If the login is invalid (invalid_login)</response>
+        </member>
+        <member name="M:Celebratix.Controllers.AccountController.UpdateAccountEmail(Celebratix.Common.Models.DTOs.UpdateAccountEmailDto)">
+            <response code="403">Email is changed to the one already set (constraint_violation)</response>
+            <response code="400">Email is already confirmed (email_already_confirmed)</response>
+            <response code="400">Other error setting email. See possible identity errors</response>
+        </member>
+        <member name="M:Celebratix.Controllers.AccountController.ConfirmEmail(System.String,System.String)">
+            <response code="400">If the email confirmation failed</response>
+        </member>
+        <member name="M:Celebratix.Controllers.AccountController.SendConfirmEmail(System.String)">
+            <summary>
+            Sends a new email confirmation email.
+            </summary>
+        </member>
+        <member name="M:Celebratix.Controllers.AccountController.ActivateAccount(Celebratix.Common.Models.DTOs.ActivateAccountDto)">
+            <summary>
+            Note: Also signs the user in
+            </summary>
+            <response code="400">If the email confirmation failed</response>
+            <response code="404">If no user with the given id was found</response>
+        </member>
+        <member name="M:Celebratix.Controllers.AccountController.ForgotPassword(Celebratix.Common.Models.DTOs.ForgotPasswordDto)">
+            <summary>
+            Used for requesting an email with a password reset link
+            </summary>
+            <response code="404">If no user with the given email was found</response>
+        </member>
+        <member name="M:Celebratix.Controllers.AccountController.ResetPassword(Celebratix.Common.Models.DTOs.ResetPasswordDto)">
+            <summary>
+            Note: Also signs the user in if the password reset succeeded
+            </summary>
+            <response code="404">If no user with the given email was found</response>
+            <response code="400">If the password reset failed (most likely a non-valid token)</response>
+        </member>
+        <member name="M:Celebratix.Controllers.AccountController.Delete">
+            <response code="400">If any active marketplace listings exist on the account (ticket_in_marketplace_listing)</response>
+        </member>
+        <member name="M:Celebratix.Controllers.Admin.BusinessesController.GetCompany(System.Guid)">
+            <response code="404">No company with given id was found</response>
+        </member>
+        <member name="M:Celebratix.Controllers.Admin.BusinessesController.Create(Celebratix.Common.Models.DTOs.Admin.Business.BusinessUpdateAdminDto)">
+            <response code="404">No valid user for the given contact id was found</response>
+        </member>
+        <member name="M:Celebratix.Controllers.Admin.BusinessesController.Edit(System.Guid,Celebratix.Common.Models.DTOs.Admin.Business.BusinessUpdateAdminDto)">
+            <response code="404">No company with given id was found</response>
+            <response code="404">No valid user for the given contact id was found</response>
+        </member>
+        <member name="M:Celebratix.Controllers.Admin.BusinessesController.GetCompanyRevenue(System.Guid,Celebratix.Common.Models.DTOs.TimespanInputDto)">
+            <response code="404">No company with given id was found</response>
+        </member>
+        <member name="T:Celebratix.Controllers.Admin.CategoriesController">
+            <summary>
+            Admin specific endpoints for managing categories
+            See "public" CategoriesController for non-admin endpoints
+            </summary>
+        </member>
+        <member name="M:Celebratix.Controllers.Admin.CategoriesController.GetCategories">
+            <summary>
+            Gives back a list of all countries (both active and inactive)
+            </summary>
+        </member>
+        <member name="M:Celebratix.Controllers.Admin.CategoriesController.UpdateCategory(System.Int32,Celebratix.Common.Models.DTOs.Admin.Categories.CategoryUpdateAdminDto)">
+            <response code="404">No category with given id was found</response>
+        </member>
+        <member name="T:Celebratix.Controllers.Admin.CountriesController">
+            <summary>
+            Admin specific endpoints for managing countries
+            See "public" CountriesController for non-admin endpoints
+            </summary>
+        </member>
+        <member name="M:Celebratix.Controllers.Admin.CountriesController.GetCountries">
+            <summary>
+            Gives back a list of all countries (both active and inactive)
+            </summary>
+        </member>
+        <member name="M:Celebratix.Controllers.Admin.CountriesController.EnableCountry(System.String)">
+            <response code="404">No country with given id was found</response>
+        </member>
+        <member name="M:Celebratix.Controllers.Admin.CountriesController.DisableCountry(System.String)">
+            <response code="404">No country with given id was found</response>
+        </member>
+        <member name="T:Celebratix.Controllers.Admin.CurrenciesController">
+            <summary>
+            Admin specific endpoints for managing countries
+            See "public" CountriesController for non-admin endpoints
+            </summary>
+        </member>
+        <member name="M:Celebratix.Controllers.Admin.CurrenciesController.GetCurrencies">
+            <summary>
+            Gives back a list of all countries (both active and inactive)
+            </summary>
+        </member>
+        <member name="M:Celebratix.Controllers.Admin.CurrenciesController.GetCurrency(System.String)">
+            <response code="404">No currency with given code was found</response>
+        </member>
+        <member name="M:Celebratix.Controllers.Admin.CurrenciesController.UpdateCurrency(System.String,Celebratix.Common.Models.DTOs.Admin.CurrencyUpdateAdminDto)">
+            <response code="404">No currency with given id was found</response>
+        </member>
+        <member name="M:Celebratix.Controllers.Admin.PayoutsController.GetPayoutsForBusiness(System.Guid,System.Int32,System.Int32)">
+            <summary>
+            Returns an empty result if no business for the id was found
+            </summary>
+        </member>
+        <member name="T:Celebratix.Controllers.Admin.UsersController">
+            <summary>
+            Admin specific endpoints for handling users
+            </summary>
+        </member>
+        <member name="M:Celebratix.Controllers.Admin.UsersController.GetAllUsers(System.Int32,System.Int32)">
+            <summary>
+            Returns all users, including admins
+            </summary>
+        </member>
+        <member name="M:Celebratix.Controllers.Admin.UsersController.GetUser(System.String)">
+            <response code="404">If the account was not found</response>
+        </member>
+        <member name="M:Celebratix.Controllers.Admin.UsersController.CheckEmailFree(System.String)">
+            <summary>
+            Checks if the email is unused/free/unoccupied
+            Returns a bool with the answer
+            </summary>
+        </member>
+        <member name="M:Celebratix.Controllers.Admin.UsersController.CreateAdminUser(Celebratix.Common.Models.DTOs.Admin.Users.CreateAdminUserAdminDto)">
+            <response code="400">If the supplied role isn't an admin role (unsupported_role)</response>
+        </member>
+        <member name="M:Celebratix.Controllers.Admin.UsersController.CreateBusinessUser(Celebratix.Common.Models.DTOs.Admin.Users.CreateBusinessUserAdminDto)">
+            <response code="403">Owner or location has to be set</response>
+        </member>
+        <member name="M:Celebratix.Controllers.Admin.UsersController.AddRole(System.String,Celebratix.Common.Models.Enums.Role,Celebratix.Common.Models.DTOs.PasswordVerificationDto)">
+            <summary>
+            Adds the user to the specified role
+            </summary>
+            <response code="400">If the action failed and the user wasn't added to the role</response>
+            <response code="400">If the supplied password was invalid (invalid_password)</response>
+            <response code="400">If the supplied role isn't an admin role (unsupported_role)</response>
+        </member>
+        <member name="M:Celebratix.Controllers.Admin.UsersController.RemoveRole(System.String,Celebratix.Common.Models.Enums.Role,Celebratix.Common.Models.DTOs.PasswordVerificationDto)">
+            <summary>
+            Removes the user from the specified role
+            </summary>
+            <response code="400">If the action failed and the user wasn't removed from the role</response>
+            <response code="400">If the supplied password was invalid (invalid_password)</response>
+            <response code="400">If the supplied role isn't an admin role (unsupported_role)</response>
+        </member>
+        <member name="M:Celebratix.Controllers.Business.EventsController.GetEvent(System.Int32)">
+            <response code="404">No event with given id was found</response>
+        </member>
+        <member name="M:Celebratix.Controllers.Business.EventsController.ArrangeTickets(System.Int32,Celebratix.Common.Models.DTOs.Business.Events.EventArrangeTicketsBusinessDto[])">
+            <summary>
+            Set the order of how the tickets should be displayed on the order page. Lowest index goes first.
+            </summary>
+        </member>
+        <member name="M:Celebratix.Controllers.Business.EventsController.Create(Celebratix.Common.Models.DTOs.Business.Events.EventCreateBusinessDto)">
+            <response code="400">Slug is already used (slug_already_used)</response>
+            <response code="400">Slug has invalid format (slug_invalid_format)</response>
+        </member>
+        <member name="M:Celebratix.Controllers.Business.EventsController.Edit(System.Int32,Celebratix.Common.Models.DTOs.Business.Events.EventUpdateBusinessDto)">
+            <response code="400">Slug is already used (slug_already_used)</response>
+            <response code="400">Slug has invalid format (slug_invalid_format)</response>
+            <response code="404">No company with given id was found</response>
+            <response code="404">No valid user for the given contact id was found</response>
+        </member>
+        <member name="M:Celebratix.Controllers.Business.EventsController.Edit(System.Int32,System.Guid,Celebratix.Common.Models.DTOs.Business.Events.EventTicketTypeUpdateBusinessDto)">
+            <response code="404">No company with given id was found</response>
+            <response code="404">No valid user for the given contact id was found</response>
+        </member>
+        <member name="M:Celebratix.Controllers.Business.OrdersController.GetOrder(System.Guid)">
+            <response code="404">No order with given id was found</response>
+        </member>
+        <member name="M:Celebratix.Controllers.Business.TicketsController.ScanTicket(System.Int32,Celebratix.Common.Models.DTOs.Business.Tickets.TicketScanningInputDto)">
+            <response code="404">No ticket with the given id was found</response>
+            <response code="400">The supplied time for the ticket is outside the allowed range (ticket_qr_time_expired)</response>
+            <response code="400">Ticket has already been scanned/checked in (ticket_already_scanned)</response>
+            <response code="400">Ticket is not one of the allowed types (bad_ticket_type_on_ticket)</response>
+            <response code="400">The ticket isn't in the supplied event (bad_event_on_ticket)</response>
+            <response code="400">The ticket is in an active marketplace listing (ticket_in_marketplace_listing)</response>
+            <response code="400">The event end time has passed (event_end_time_passed)</response>
+        </member>
+        <member name="M:Celebratix.Controllers.Business.TicketsController.RefundTicket(System.Int32,Celebratix.Common.Models.DTOs.Business.Tickets.TicketScanningInputDto)">
+            <response code="404">No ticket with the given id was found</response>
+            <response code="400">The supplied time for the ticket is outside the allowed range (ticket_qr_time_expired)</response>
+            <response code="400">Ticket has already been scanned/checked in (ticket_already_scanned)</response>
+            <response code="400">Ticket is not one of the allowed types (bad_ticket_type_on_ticket)</response>
+            <response code="400">The ticket isn't in the supplied event (bad_event_on_ticket)</response>
+            <response code="400">The ticket is in an active marketplace listing (ticket_in_marketplace_listing)</response>
+            <response code="400">The ticket is in an active transfer offer (ticket_in_transfer_offer)</response>
+            <response code="400">The ticket is unavailable to refund (ticket_is_unavailable_to_refund)</response>
+        </member>
+        <member name="M:Celebratix.Controllers.Business.UsersController.GetUser(System.String)">
+            <response code="404">If the account was not found</response>
+        </member>
+        <member name="M:Celebratix.Controllers.CategoriesController.GetCategories">
+            <summary>
+            Gives back a list of all countries (both active and inactive)
+            </summary>
+        </member>
+        <member name="M:Celebratix.Controllers.CountriesController.GetCountries">
+            <summary>
+            Gives back a list of all active countries
+            </summary>
+        </member>
+        <member name="M:Celebratix.Controllers.CountriesController.GetCountry(System.String)">
+            <response code="404">No country with given id was found</response>
+        </member>
+        <member name="M:Celebratix.Controllers.CurrenciesController.GetCurrencies">
+            <summary>
+            Gives back a list of all active currencies
+            </summary>
+        </member>
+        <member name="M:Celebratix.Controllers.CurrenciesController.GetCurrency(System.String)">
+            <response code="404">No currency with given code was found</response>
+        </member>
+        <member name="M:Celebratix.Controllers.User.EventsController.GetEvent(System.Int32,System.String,System.String)">
+            <response code="404">No event with given id was found</response>
+        </member>
+        <member name="M:Celebratix.Controllers.User.EventsController.GetEvent(System.String,System.String,System.String)">
+            <response code="404">No event with given slug was found</response>
+        </member>
+        <member name="M:Celebratix.Controllers.User.MarketplaceController.GetListingsForEvent(System.Int32,System.Nullable{System.Guid},System.Int32,System.Int32)">
+            <summary>
+            Sorted by price
+            </summary>
+        </member>
+        <member name="M:Celebratix.Controllers.User.MarketplaceController.GetOwnListings(System.Int32,System.Int32,System.Nullable{System.Boolean})">
+            <summary>
+            Sorted by date
+            </summary>
+        </member>
+        <member name="M:Celebratix.Controllers.User.MarketplaceController.CreateListing(Celebratix.Common.Models.DTOs.User.Marketplace.MarketplaceListingCreateDto)">
+            <summary>
+            Can only be done before payment information has been submitted
+            </summary>
+            <response code="400">If the event end time has already passed (event_end_time_passed)</response>
+            <response code="400">If price isn't valid (argument_out_of_range)</response>
+            <response code="400">Payouts isn't enabled on the user. Make sure the payouts verification process is completed (payouts_not_enabled_on_user)</response>
+            <response code="400">Ticket has already been scanned/checked in (ticket_already_scanned)</response>
+            <response code="400">The ticket is in an active marketplace listing (ticket_in_marketplace_listing)</response>
+            <response code="400">The ticket is in an active transfer offer (ticket_in_transfer_offer)</response>
+            <response code="400">The ticket was sold or transferred (ticket_sold_or_transferred)</response>
+            <response code="400">The event end time has passed (event_end_time_passed)</response>
+        </member>
+        <member name="M:Celebratix.Controllers.User.MarketplaceController.CancelListing(System.Guid)">
+            <summary>
+            Can only be done before payment information has been submitted
+            </summary>
+            <response code="400">The listing isn't available for being cancelled (listing_not_available)</response>
+        </member>
+        <member name="M:Celebratix.Controllers.User.OrdersController.PlacePrimaryMarketOrder(Celebratix.Common.Models.DTOs.User.Orders.PrimaryMarketOrderCreateDto)">
+            <summary>
+            Placing a new "primary market" order
+            </summary>
+            <response code="400">If the user tries to buy an unallowed amount of tickets in the order (allowed_tickets_limit_exceeded)</response>
+            <response code="400">If the amount of tickets the user tried to buy aren't available (requested_tickets_not_available)</response>
+        </member>
+        <member name="M:Celebratix.Controllers.User.OrdersController.PlaceMarketplaceOrder(System.Guid)">
+            <summary>
+            Placing a new marketplace order
+            </summary>
+            <response code="400">If the marketplace listing isn't available anymore (listing_not_available)</response>
+        </member>
+        <member name="M:Celebratix.Controllers.User.OrdersController.CancelOrder(System.Guid)">
+            <summary>
+            Can only be done before payment information has been submitted
+            </summary>
+            <response code="404">No cancellable order was found. I.e. the order might exist but not be cancellable by the user</response>
+        </member>
+        <member name="M:Celebratix.Controllers.User.OrdersController.GetOrderFromMagic(System.String)">
+            <summary>
+            Get ticket and event data from magic, the tickets field will only be populated if the order is completed
+            Doesn't need authentication
+            Excludes tickets that cannot be scanned
+            </summary>
+        </member>
+        <member name="M:Celebratix.Controllers.User.OrdersController.GetOrderFromMagicV2(System.String)">
+            <summary>
+            Get ticket and event data from magic, the tickets field will only be populated if the order is completed
+            Doesn't need authentication
+            Includes tickets that cannot be scanned
+            </summary>
+        </member>
+        <member name="M:Celebratix.Controllers.User.OrdersController.GetEventsByUserOrders(System.Collections.Generic.List{Celebratix.Common.Models.Enums.OrderStatus},System.Nullable{Celebratix.Common.Models.Enums.EventStatus},System.Int32,System.Int32)">
+            <summary>
+            Get all events the user has orders for, can be filtered
+            </summary>
+        </member>
+        <member name="T:Celebratix.Controllers.User.StripeController">
+            <summary>
+            For managing the "connected account" details needed for payouts
+            (and therefore for creating marketplace listings)
+            </summary>
+        </member>
+        <member name="M:Celebratix.Controllers.User.StripeController.CreateOnboardingAccountLink(Celebratix.Common.Models.DTOs.User.StripeAccountLinkUrlsDto)">
+            <summary>
+            Provides a form for inputting outstanding requirements.
+            Send the user to the form in this mode to just collect the new information you need.
+            </summary>
+        </member>
+        <member name="M:Celebratix.Controllers.User.StripeController.CreateUpdateAccountLink(Celebratix.Common.Models.DTOs.User.StripeAccountLinkUrlsDto)">
+            <summary>
+            Displays the fields that are already populated on the account object,
+            and allows your user to edit previously provided information.
+            Consider framing this as “edit my profile” or “update my verification information”.
+            </summary>
+        </member>
+        <member name="M:Celebratix.Controllers.User.TicketsController.GetAllForUpcomingEvents(System.Int32,System.Int32)">
+            <summary>
+            Only gets available tickets. I.e. tickets in active transfer offers or marketplace listings are not included
+            </summary>
+        </member>
+        <member name="M:Celebratix.Controllers.User.TicketsController.GetTicketsForOrder(System.Guid)">
+            <summary>
+            Gets all tickets, excluding those that cannot be scanned
+            </summary>
+        </member>
+        <member name="M:Celebratix.Controllers.User.TicketsController.GetTicketsForOrderV2(System.Guid)">
+            <summary>
+            Gets all tickets, including those that cannot be scanned
+            </summary>
+        </member>
+        <member name="M:Celebratix.Controllers.User.TicketsController.GetTransferOfferById(System.Guid)">
+            <summary>
+            Currently only permitted for the Transferor, when there is a need for another user to
+            access this endpoint, then the permission (and/or the query) will be adjusted.
+            </summary>
+        </member>
+        <member name="M:Celebratix.Controllers.User.TicketsController.CreateTransferOffer(System.Guid)">
+            <response code="400">Ticket has already been scanned/checked in (ticket_already_scanned)</response>
+            <response code="400">The ticket is in an active marketplace listing (ticket_in_marketplace_listing)</response>
+            <response code="400">The ticket is in an active transfer offer (ticket_in_transfer_offer)</response>
+            <response code="400">The ticket was sold or transferred (ticket_sold_or_transferred)</response>
+            <response code="400">The event end time has passed (event_end_time_passed)</response>
+        </member>
+        <member name="M:Celebratix.Controllers.User.TicketsController.AcceptTransferOffer(System.String)">
+            <response code="400">Transfer offer is not available to accept or the user is the same as the transferor (transfer_offer_not_available)</response>
+        </member>
+        <member name="M:Celebratix.Controllers.User.TicketsController.CancelTransferOffer(System.Guid)">
+            <response code="400">Transfer offer is not available to cancel (transfer_offer_not_available)</response>
+        </member>
+        <member name="M:Celebratix.Controllers.User.TicketsController.GetEventsByOwnedTickets(System.Nullable{Celebratix.Common.Models.Enums.EventStatus},System.Int32,System.Int32)">
+            <summary>
+            Returns all the events for which the user owns at least 1 ticket
+            </summary>
+        </member>
+        <member name="M:Celebratix.Controllers.User.TicketsController.GetOwnedTicketsForEvent(System.Int32)">
+            <summary>
+            Returns all the tickets the user owns for a specific event
+            </summary>
+        </member>
+        <member name="M:Celebratix.Controllers.User.TicketsController.GetOwnedTicketsForTicketType(System.Guid)">
+            <summary>
+            Returns all the tickets the user owns of a specific ticketType
+            </summary>
+        </member>
+        <member name="T:Celebratix.Migrations.InitialCreate">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.InitialCreate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.InitialCreate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.AddIntialModelDesigns">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddIntialModelDesigns.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddIntialModelDesigns.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddIntialModelDesigns.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.MoveUniqueEmailConstraintToModel">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.MoveUniqueEmailConstraintToModel.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.MoveUniqueEmailConstraintToModel.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.MoveUniqueEmailConstraintToModel.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.AddPathToImageModel">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddPathToImageModel.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddPathToImageModel.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddPathToImageModel.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.AddCurrencyStripePrepEtc">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddCurrencyStripePrepEtc.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddCurrencyStripePrepEtc.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddCurrencyStripePrepEtc.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.RemoveCascadeDeletionFromCurrencyAndMarketplaceListing">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.RemoveCascadeDeletionFromCurrencyAndMarketplaceListing.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.RemoveCascadeDeletionFromCurrencyAndMarketplaceListing.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.RemoveCascadeDeletionFromCurrencyAndMarketplaceListing.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.AddDefaultVatAndImageToBusiness">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddDefaultVatAndImageToBusiness.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddDefaultVatAndImageToBusiness.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddDefaultVatAndImageToBusiness.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.AddTicketPurcahseAndVisibleColumn">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddTicketPurcahseAndVisibleColumn.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddTicketPurcahseAndVisibleColumn.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddTicketPurcahseAndVisibleColumn.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.AddCityAndAgeLimitToEvents">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddCityAndAgeLimitToEvents.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddCityAndAgeLimitToEvents.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddCityAndAgeLimitToEvents.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.RemoveUnqiueReqForAffiliateCodes">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.RemoveUnqiueReqForAffiliateCodes.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.RemoveUnqiueReqForAffiliateCodes.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.RemoveUnqiueReqForAffiliateCodes.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.AddCountryCallingCodes">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddCountryCallingCodes.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddCountryCallingCodes.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddCountryCallingCodes.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.AddChangesForPaymentFlow">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddChangesForPaymentFlow.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddChangesForPaymentFlow.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddChangesForPaymentFlow.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.AddTicketScannedProperty">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddTicketScannedProperty.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddTicketScannedProperty.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddTicketScannedProperty.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.MakeOrderPurchaserRequired">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.MakeOrderPurchaserRequired.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.MakeOrderPurchaserRequired.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.MakeOrderPurchaserRequired.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.RenameOrderStatusToStatus">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.RenameOrderStatusToStatus.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.RenameOrderStatusToStatus.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.RenameOrderStatusToStatus.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.AddServiceFeeToTicketType">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddServiceFeeToTicketType.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddServiceFeeToTicketType.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddServiceFeeToTicketType.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.AddCurrencyToOrder">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddCurrencyToOrder.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddCurrencyToOrder.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddCurrencyToOrder.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.AddStripeAccountLinkSupport">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddStripeAccountLinkSupport.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddStripeAccountLinkSupport.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddStripeAccountLinkSupport.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.MakeOriginalOrderVisibleOnTicketModel">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.MakeOriginalOrderVisibleOnTicketModel.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.MakeOriginalOrderVisibleOnTicketModel.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.MakeOriginalOrderVisibleOnTicketModel.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.AddServiceFeeToMarketplaceListingModel">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddServiceFeeToMarketplaceListingModel.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddServiceFeeToMarketplaceListingModel.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddServiceFeeToMarketplaceListingModel.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.AddCheckedInTicketsColumnToEventTicket">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddCheckedInTicketsColumnToEventTicket.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddCheckedInTicketsColumnToEventTicket.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddCheckedInTicketsColumnToEventTicket.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.RenameCheckedInTicketsForConsistency">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.RenameCheckedInTicketsForConsistency.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.RenameCheckedInTicketsForConsistency.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.RenameCheckedInTicketsForConsistency.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.ChangesForTicketTransferSupport">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.ChangesForTicketTransferSupport.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.ChangesForTicketTransferSupport.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.ChangesForTicketTransferSupport.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.RemoveMaxTicketsOnEvent">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.RemoveMaxTicketsOnEvent.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.RemoveMaxTicketsOnEvent.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.RemoveMaxTicketsOnEvent.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.AddNameAndDescriptionToAffilateCodes">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddNameAndDescriptionToAffilateCodes.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddNameAndDescriptionToAffilateCodes.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddNameAndDescriptionToAffilateCodes.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.AddRevenueColumnOnTicketTypeAndTicketsBoughtCounterToAffiliateCodes">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddRevenueColumnOnTicketTypeAndTicketsBoughtCounterToAffiliateCodes.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddRevenueColumnOnTicketTypeAndTicketsBoughtCounterToAffiliateCodes.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddRevenueColumnOnTicketTypeAndTicketsBoughtCounterToAffiliateCodes.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.AddRevenueAndViewsToAffiliateCodes">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddRevenueAndViewsToAffiliateCodes.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddRevenueAndViewsToAffiliateCodes.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddRevenueAndViewsToAffiliateCodes.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.AddBusinessPayouts">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddBusinessPayouts.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddBusinessPayouts.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddBusinessPayouts.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.AddCompletedAtToOrders">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddCompletedAtToOrders.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddCompletedAtToOrders.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddCompletedAtToOrders.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.FixTicketOrderRelationship">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.FixTicketOrderRelationship.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.FixTicketOrderRelationship.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.FixTicketOrderRelationship.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.AddTicketBackgroundImageToEvent">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddTicketBackgroundImageToEvent.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddTicketBackgroundImageToEvent.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddTicketBackgroundImageToEvent.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.AddTicketBackgroundAndTextColorColumns">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddTicketBackgroundAndTextColorColumns.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddTicketBackgroundAndTextColorColumns.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddTicketBackgroundAndTextColorColumns.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.RemoveUniqueReqFromTicketTypeLinkCodeColumn">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.RemoveUniqueReqFromTicketTypeLinkCodeColumn.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.RemoveUniqueReqFromTicketTypeLinkCodeColumn.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.RemoveUniqueReqFromTicketTypeLinkCodeColumn.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.AddMinimumPayoutValueToCurrency">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddMinimumPayoutValueToCurrency.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddMinimumPayoutValueToCurrency.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddMinimumPayoutValueToCurrency.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.RenameMinMarketplaceListingPrice">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.RenameMinMarketplaceListingPrice.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.RenameMinMarketplaceListingPrice.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.RenameMinMarketplaceListingPrice.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.AddCustomEventEmailPropToEvent">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddCustomEventEmailPropToEvent.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddCustomEventEmailPropToEvent.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddCustomEventEmailPropToEvent.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.AddCustomSlugPropToEvents">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddCustomSlugPropToEvents.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddCustomSlugPropToEvents.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddCustomSlugPropToEvents.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.AddCodeToEvents">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddCodeToEvents.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddCodeToEvents.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddCodeToEvents.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.AddPayoutAccounts">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddPayoutAccounts.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddPayoutAccounts.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddPayoutAccounts.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.AddSortIndexEventTicket">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddSortIndexEventTicket.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddSortIndexEventTicket.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddSortIndexEventTicket.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.SecureApplicationFee">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.SecureApplicationFee.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.SecureApplicationFee.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.SecureApplicationFee.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.AddBusinessFacebookPixelId">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddBusinessFacebookPixelId.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddBusinessFacebookPixelId.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddBusinessFacebookPixelId.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.AddMinumumTicketPurchaseAmount">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddMinumumTicketPurchaseAmount.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddMinumumTicketPurchaseAmount.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddMinumumTicketPurchaseAmount.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.SplitRevenue">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.SplitRevenue.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.SplitRevenue.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.SplitRevenue.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.OrderEvent">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.OrderEvent.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.OrderEvent.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.OrderEvent.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.AddChannel">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddChannel.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddChannel.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddChannel.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.AddChannelSlug">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddChannelSlug.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddChannelSlug.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddChannelSlug.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.AddOnlyAffilatesTicketTypeFlag">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddOnlyAffilatesTicketTypeFlag.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddOnlyAffilatesTicketTypeFlag.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddOnlyAffilatesTicketTypeFlag.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.RemoveAffiliateTicketsBought">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.RemoveAffiliateTicketsBought.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.RemoveAffiliateTicketsBought.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.RemoveAffiliateTicketsBought.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.AddBusinessEventsPageUrl">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddBusinessEventsPageUrl.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddBusinessEventsPageUrl.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddBusinessEventsPageUrl.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.RemoveEventFromAffiliate">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.RemoveEventFromAffiliate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.RemoveEventFromAffiliate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.RemoveEventFromAffiliate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.EnableAllCountries">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.EnableAllCountries.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.EnableAllCountries.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.EnableAllCountries.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.AddRefreshTokens">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddRefreshTokens.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddRefreshTokens.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddRefreshTokens.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.TicketLatestOrder">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.TicketLatestOrder.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.TicketLatestOrder.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.TicketLatestOrder.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.AddExternalEventUrl">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddExternalEventUrl.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddExternalEventUrl.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddExternalEventUrl.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.AdditionalFieldsAndTables">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AdditionalFieldsAndTables.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AdditionalFieldsAndTables.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AdditionalFieldsAndTables.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.UpdateChannelEventsTable">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.UpdateChannelEventsTable.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.UpdateChannelEventsTable.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.UpdateChannelEventsTable.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.RemoveSharedType">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.RemoveSharedType.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.RemoveSharedType.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.RemoveSharedType.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.MakeAvailabilityNullableAgain">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.MakeAvailabilityNullableAgain.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.MakeAvailabilityNullableAgain.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.MakeAvailabilityNullableAgain.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.MakeTicketImagePropertyNullable">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.MakeTicketImagePropertyNullable.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.MakeTicketImagePropertyNullable.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.MakeTicketImagePropertyNullable.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.removeCapacityMappedToMaxTicketsAvailable">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.removeCapacityMappedToMaxTicketsAvailable.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.removeCapacityMappedToMaxTicketsAvailable.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.removeCapacityMappedToMaxTicketsAvailable.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.CreateTemporaryNewChannelEventsTable">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.CreateTemporaryNewChannelEventsTable.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.CreateTemporaryNewChannelEventsTable.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.CreateTemporaryNewChannelEventsTable.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.DropExistingChannelEventsTable">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.DropExistingChannelEventsTable.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.DropExistingChannelEventsTable.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.DropExistingChannelEventsTable.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.RenameTempoararyTableToChannelEventsTable">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.RenameTempoararyTableToChannelEventsTable.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.RenameTempoararyTableToChannelEventsTable.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.RenameTempoararyTableToChannelEventsTable.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.RemoveEventTicketsTableAndCreateChannelTicketTypesTable">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.RemoveEventTicketsTableAndCreateChannelTicketTypesTable.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.RemoveEventTicketsTableAndCreateChannelTicketTypesTable.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.RemoveEventTicketsTableAndCreateChannelTicketTypesTable.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.RenameCustomBackgroundImage">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.RenameCustomBackgroundImage.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.RenameCustomBackgroundImage.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.RenameCustomBackgroundImage.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.AddChannelResaleOptions">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddChannelResaleOptions.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddChannelResaleOptions.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddChannelResaleOptions.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.RemoveObsoleteChannelTicketsResale">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.RemoveObsoleteChannelTicketsResale.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.RemoveObsoleteChannelTicketsResale.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.RemoveObsoleteChannelTicketsResale.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.AddResaleOptionsToChannelEvent">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddResaleOptionsToChannelEvent.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddResaleOptionsToChannelEvent.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddResaleOptionsToChannelEvent.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.FixForChannelsAndEvents">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.FixForChannelsAndEvents.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.FixForChannelsAndEvents.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.FixForChannelsAndEvents.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.UpdateChannelFields">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.UpdateChannelFields.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.UpdateChannelFields.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.UpdateChannelFields.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Celebratix.Migrations.AddRefundFieldInTicket">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddRefundFieldInTicket.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddRefundFieldInTicket.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Celebratix.Migrations.AddRefundFieldInTicket.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

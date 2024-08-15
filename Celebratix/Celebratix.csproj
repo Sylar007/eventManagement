@@ -1,0 +1,52 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+				<EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Asp.Versioning.Mvc" Version="7.1.1" />
+        <PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="7.1.0" />
+        <PackageReference Include="CSharpFunctionalExtensions" Version="2.40.3" />
+        <PackageReference Include="FluentResults" Version="3.15.2" />
+        <PackageReference Include="FluentValidation" Version="11.9.0" />
+        <PackageReference Include="Hangfire.AspNetCore" Version="1.8.0" />
+        <PackageReference Include="Hangfire.Core" Version="1.8.0" />
+        <PackageReference Include="Hangfire.InMemory" Version="0.7.0" />
+        <PackageReference Include="Hangfire.PostgreSql" Version="1.20.4" />
+        <PackageReference Include="Hangfire.SqlServer" Version="1.8.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.5">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.5" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.5">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Npgsql" Version="7.0.6" />
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.11" />
+        <PackageReference Include="Sentry.AspNetCore" Version="3.40.1" />
+        <PackageReference Include="SixLabors.ImageSharp.Web" Version="3.0.1" />
+        <PackageReference Include="SixLabors.ImageSharp.Web.Providers.AWS" Version="3.0.1" />
+        <PackageReference Include="Stripe.net" Version="41.14.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.5" />
+        <PackageReference Include="Mindscape.Raygun4Net.AspNetCore" Version="6.6.6" />
+        <PackageReference Include="Twilio.AspNet.Core" Version="8.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Celebratix.Common\Celebratix.Common.csproj" />
+    </ItemGroup>
+
+    <PropertyGroup>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <NoWarn>$(NoWarn);1591</NoWarn>
+    </PropertyGroup>
+
+
+</Project>

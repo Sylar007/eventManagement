@@ -1,0 +1,12 @@
+C:\Users\user\celebratix\celebratix-backend\Celebratix.Common\bin\Debug\net7.0\Celebratix.Common.deps.json
+C:\Users\user\celebratix\celebratix-backend\Celebratix.Common\bin\Debug\net7.0\Celebratix.Common.dll
+C:\Users\user\celebratix\celebratix-backend\Celebratix.Common\bin\Debug\net7.0\Celebratix.Common.pdb
+C:\Users\user\celebratix\celebratix-backend\Celebratix.Common\obj\Debug\net7.0\Celebratix.Common.csproj.AssemblyReference.cache
+C:\Users\user\celebratix\celebratix-backend\Celebratix.Common\obj\Debug\net7.0\Celebratix.Common.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\celebratix\celebratix-backend\Celebratix.Common\obj\Debug\net7.0\Celebratix.Common.AssemblyInfoInputs.cache
+C:\Users\user\celebratix\celebratix-backend\Celebratix.Common\obj\Debug\net7.0\Celebratix.Common.AssemblyInfo.cs
+C:\Users\user\celebratix\celebratix-backend\Celebratix.Common\obj\Debug\net7.0\Celebratix.Common.csproj.CoreCompileInputs.cache
+C:\Users\user\celebratix\celebratix-backend\Celebratix.Common\obj\Debug\net7.0\Celebratix.Common.dll
+C:\Users\user\celebratix\celebratix-backend\Celebratix.Common\obj\Debug\net7.0\refint\Celebratix.Common.dll
+C:\Users\user\celebratix\celebratix-backend\Celebratix.Common\obj\Debug\net7.0\Celebratix.Common.pdb
+C:\Users\user\celebratix\celebratix-backend\Celebratix.Common\obj\Debug\net7.0\ref\Celebratix.Common.dll
